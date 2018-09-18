@@ -3,9 +3,12 @@ module Lib
     , preprocess
     ) where
 
-preprocess :: String -> String
-preprocess text = filter (not . (`elem` ['!','.'])) text
+import Data.Text as T
+import Data.Char(isPunctuation)
 
-isPalindrome :: String -> Bool
-isPalindrome text = cleanText == reverse cleanText
+preprocess :: T.Text -> T.Text
+preprocess text = T.filter (not . isPunctuation) text
+
+isPalindrome :: T.Text -> Bool
+isPalindrome text = cleanText == T.reverse cleanText
   where cleanText = preprocess text

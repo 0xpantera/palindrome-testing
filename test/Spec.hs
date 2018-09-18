@@ -17,5 +17,6 @@ prop_reverseInvariant text = isPalindrome text ==
 
 main :: IO ()
 main = do
-  quickCheck prop_punctuationInvariant
+  quickCheckWith stdArgs { maxSuccess = 1000 } prop_punctuationInvariant
+  quickCheck prop_reverseInvariant
   putStrLn "done!"

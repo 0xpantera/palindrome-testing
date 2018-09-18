@@ -1,6 +1,6 @@
 import Lib
 import Data.Char (isPunctuation)
-
+import Test.QuickCheck
 
 assert :: Bool -> String -> String -> IO ()
 assert test passStatement failStatement = if test
@@ -17,9 +17,5 @@ prop_reverseInvariant text = isPalindrome text ==
 
 main :: IO ()
 main = do
-  putStrLn "Running tests..."
-  assert (isPalindrome "racecar") "passed 'racecar'" "FAIL: 'racecar'"
-  assert (isPalindrome "racecar!") "passed 'racecar!'" "'FAIL: 'racecar!'"
-  assert ((not . isPalindrome) "cat") "passed 'cat'" "FAIL: 'cat'"
-  assert (isPalindrome "racecar.") "passed 'racecar.'" "FAIL: 'racecar.'"
+  quickCheck prop_punctuationInvariant
   putStrLn "done!"
